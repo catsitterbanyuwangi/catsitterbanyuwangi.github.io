@@ -9,6 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Penting! Token untuk checkout
+          token: ${{ secrets.GH_DEPLOY_TOKEN }}
 
       - uses: actions/setup-node@v4
         with:
@@ -17,17 +20,16 @@ jobs:
       - run: npm install
       - run: npm run build
 
-      - name: Deploy to GitHub Pages
+      - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
-          # Gunakan PAT dari secret
-          github_token: ${{ secrets.GH_PAGES_TOKEN }}
+          # Gunakan PAT khusus
+          deploy_key: ${{ secrets.GH_DEPLOY_TOKEN }}
 
-          # Target repo:
+          # Target repository
           external_repository: catsitterbanyuwangi/catsitterbanyuwangi.github.io
 
-          # Branch target
           publish_branch: gh-pages
-
           publish_dir: ./out
           keep_files: false
+          force_orphan: true
