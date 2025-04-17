@@ -23,12 +23,8 @@ jobs:
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
-          # Gunakan PAT khusus
-          deploy_key: ${{ secrets.GH_DEPLOY_TOKEN }}
-
-          # Target repository
+          personal_token: ${{ secrets.GH_DEPLOY_TOKEN }}
           external_repository: catsitterbanyuwangi/catsitterbanyuwangi.github.io
-
           publish_branch: gh-pages
           publish_dir: ./out
           keep_files: false
