@@ -1,6 +1,7 @@
 "use client";
 
 import Navbar from "@/app/components/Navbar";
+import ThemeToggle from "@/app/components/ThemeToggle";
 
 export default function Home() {
   return (
@@ -14,6 +15,11 @@ export default function Home() {
           perawatan terbaik untuk kucing kesayangan Anda.
         </p>
       </section>
+
+      {/* Theme Toggle Positioning */}
+      <div className="fixed bottom-4 right-4 z-50">
+        <ThemeToggle />
+      </div>
     </main>
   );
 }
