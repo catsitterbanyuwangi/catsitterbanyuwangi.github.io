@@ -23,11 +23,11 @@ export default function Home() {
           <div className="text-center flex flex-col items-center">
             <div className="max-w-2xl text-white mb-12">
               <h1 className="text-3xl font-bold mb-4 md:text-4xl lg:text-5xl">
-                Lorem ipsum dolor sit amet consectetur
+                Selamat datang di Catsitter Banyuwangi
               </h1>
               <p className="text-lg mb-6 md:text-xl lg:mb-8">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua.
+                Dengan Catsitter andalan di Banyuwangi, kini Anda dapat menjalani hari tanpa was‑was dan kucing pun
+                tetap merasa nyaman di rumah.
               </p>
               <button
                 className="bg-[#e2725b] px-8 py-3 rounded-lg hover:bg-[#d06550] transition-colors 
