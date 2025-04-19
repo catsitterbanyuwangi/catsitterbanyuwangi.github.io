@@ -23,9 +23,11 @@ export default function Navbar() {
       aria-label="Main navigation">
       <div className="max-w-screen-xl flex items-center justify-center mx-auto p-4 relative">
         {/* Logo - Tengah */}
-        <a href="#" className="flex items-center transition-colors duration-200 hover:text-[#e2725b]">
-          <span className="text-2xl font-semibold whitespace-nowrap text-white">🐱 CatSitter</span>
-        </a>
+        <p className="flex items-center group transition-colors duration-200">
+          <span className="text-2xl font-semibold whitespace-nowrap text-white group-hover:text-[#e2725b] transition-colors duration-200">
+            Catsitter Banyuwangi
+          </span>
+        </p>
 
         {/* Theme Toggle - Kanan */}
         <div className="absolute right-4">
