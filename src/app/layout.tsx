@@ -16,6 +16,8 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.title}`,
   },
   description: siteConfig.description,
+  keywords:
+    'catsitter banyuwangi, penitipan kucing, jasa rawat kucing, pet sitter banyuwangi, perawatan kucing profesional, jasa kucing banyuwangi, jasa titip kebutuhan kucing, layanan kucing banyuwangi, jasa antar kucing, layanan catsitter banyuwangi, penitipan hewan peliharaan, perawatan hewan peliharaan, jasa hewan peliharaan banyuwangi',
   robots: { index: true, follow: true },
   // !STARTERCONF this is the default favicon, you can generate your own from https://realfavicongenerator.net/
   // ! copy to /favicon folder
