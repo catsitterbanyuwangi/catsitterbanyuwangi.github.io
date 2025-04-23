@@ -2,10 +2,18 @@ import { Metadata } from 'next';
 import * as React from 'react';
 
 import '@/styles/globals.css';
+import { Poppins } from 'next/font/google';
 // !STARTERCONF This is for demo purposes, remove @/styles/colors.css import immediately
 // import '@/styles/colors.css';
 
 import { siteConfig } from '@/constant/config';
+
+// Inisialisasi font
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800', '900'],
+  variable: '--font-poppins', // optional jika mau pakai CSS variable
+});
 
 // !STARTERCONF Change these default meta
 // !STARTERCONF Look at @/constant/config to change them
