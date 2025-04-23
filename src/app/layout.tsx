@@ -1,11 +1,11 @@
 import { Metadata } from 'next';
+import { Poppins } from 'next/font/google';
 import * as React from 'react';
 
 import '@/styles/globals.css';
-import { Poppins } from 'next/font/google';
+
 // !STARTERCONF This is for demo purposes, remove @/styles/colors.css import immediately
 // import '@/styles/colors.css';
-
 import { siteConfig } from '@/constant/config';
 
 // Inisialisasi font

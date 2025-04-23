@@ -2,6 +2,7 @@
 
 import clsx from 'clsx';
 import { Moon, Sun } from 'lucide-react';
+import Image from 'next/image';
 import * as React from 'react';
 
 import Button from '@/components/buttons/Button';
@@ -9,8 +10,6 @@ import ButtonLink from '@/components/links/ButtonLink';
 import UnstyledLink from '@/components/links/UnstyledLink';
 
 import Logo from '~/images/Logo.png';
-
-import Image from 'next/image';
 
 export default function HomePage() {
   const [mode, setMode] = React.useState<'dark' | 'light'>('light');
