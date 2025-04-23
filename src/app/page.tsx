@@ -1,72 +1,100 @@
 'use client';
 
-import Head from 'next/head';
+import clsx from 'clsx';
+import { Moon, Sun } from 'lucide-react';
 import * as React from 'react';
-import '@/lib/env';
 
-import ArrowLink from '@/components/links/ArrowLink';
+import Button from '@/components/buttons/Button';
 import ButtonLink from '@/components/links/ButtonLink';
-import UnderlineLink from '@/components/links/UnderlineLink';
 import UnstyledLink from '@/components/links/UnstyledLink';
 
-/**
- * SVGR Support
- * Caveat: No React Props Type.
- *
- * You can override the next-env if the type is important to you
- * @see https://stackoverflow.com/questions/68103844/how-to-override-next-js-svg-module-declaration
- */
-import Logo from '~/svg/Logo.svg';
+import Logo from '~/images/Logo.png';
 
-// !STARTERCONF -> Select !STARTERCONF and CMD + SHIFT + F
-// Before you begin editing, follow all comments with `STARTERCONF`,
-// to customize the default configuration.
+import Image from 'next/image';
 
 export default function HomePage() {
+  const [mode, setMode] = React.useState<'dark' | 'light'>('light');
+
+  const toggleMode = () => {
+    setMode((prev) => (prev === 'dark' ? 'light' : 'dark'));
+    document.documentElement.classList.toggle('dark');
+  };
+
   return (
-    <main>
-      <Head>
-        <title>Hi</title>
-      </Head>
-      <section className='bg-white'>
-        <div className='layout relative flex min-h-screen flex-col items-center justify-center py-12 text-center'>
-          <Logo className='w-16' />
-          <h1 className='mt-4'>Next.js + Tailwind CSS + TypeScript Starter</h1>
-          <p className='mt-2 text-sm text-gray-800'>
-            A starter for Next.js, Tailwind CSS, and TypeScript with Absolute
-            Import, Seo, Link component, pre-configured with Husky{' '}
-          </p>
-          <p className='mt-2 text-sm text-gray-700'>
-            <ArrowLink href='https://github.com/theodorusclarence/ts-nextjs-tailwind-starter'>
-              See the repository
-            </ArrowLink>
-          </p>
-
-          <ButtonLink className='mt-6' href='/components' variant='light'>
-            See all components
-          </ButtonLink>
-
-          <UnstyledLink
-            href='https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Ftheodorusclarence%2Fts-nextjs-tailwind-starter'
-            className='mt-4'
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              width='92'
-              height='32'
-              src='https://vercel.com/button'
-              alt='Deploy with Vercel'
+    <div
+      className={clsx(
+        'min-h-screen min-w-full', // Ini yang membuat full viewport
+        mode === 'dark' ? 'bg-dark' : 'bg-white'
+      )}
+    >
+      {/* Navbar */}
+      <nav
+        className={clsx(
+          'sticky top-0 z-50 w-full border-b',
+          mode === 'dark'
+            ? 'border-gray-800 bg-dark text-gray-100'
+            : 'border-gray-200 bg-white text-gray-900'
+        )}
+      >
+        <div className='layout flex h-16 items-center justify-between'>
+          <UnstyledLink href='/' className='hover:opacity-80'>
+            <Image
+              src={Logo}
+              alt='Catsitter Banyuwangi Logo'
+              className='w-12 h-12 rounded-full object-cover border-2 border-white transition-transform hover:scale-105'
             />
           </UnstyledLink>
 
-          <footer className='absolute bottom-2 text-gray-700'>
-            © {new Date().getFullYear()} By{' '}
-            <UnderlineLink href='https://theodorusclarence.com?ref=tsnextstarter'>
-              Theodorus Clarence
-            </UnderlineLink>
-          </footer>
+          <Button
+            variant='ghost'
+            size='sm'
+            onClick={toggleMode}
+            aria-label='Toggle dark mode'
+            className='rounded-lg p-2.5'
+          >
+            {mode === 'dark' ? (
+              <Sun className='h-5 w-5' />
+            ) : (
+              <Moon className='h-5 w-5' />
+            )}
+          </Button>
         </div>
-      </section>
-    </main>
+      </nav>
+
+      {/* Main Content - Menggunakan flex untuk mengisi sisa space */}
+      <main className='flex-1'>
+        {/* Hero Section - Mengisi tinggi penuh */}
+        <section className='h-[calc(100vh-4rem)] w-full'>
+          {' '}
+          {/* 4rem = tinggi navbar */}
+          <div className='flex h-full w-full flex-col items-center justify-center text-center'>
+            <h1 className='text-4xl font-bold md:text-5xl'>
+              Layanan Catsitter Profesional
+            </h1>
+
+            <p className='mt-4 text-lg text-gray-600 dark:text-gray-300 md:text-xl'>
+              Memberikan perawatan terbaik untuk kucing kesayangan Anda
+            </p>
+
+            <div className='mt-8 flex gap-4'>
+              <ButtonLink
+                variant='primary'
+                className='px-8 py-3 text-lg'
+                href='/booking'
+              >
+                Pesan Sekarang
+              </ButtonLink>
+              <ButtonLink
+                variant='outline'
+                className='px-8 py-3 text-lg'
+                href='/layanan'
+              >
+                Lihat Layanan
+              </ButtonLink>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
   );
 }
