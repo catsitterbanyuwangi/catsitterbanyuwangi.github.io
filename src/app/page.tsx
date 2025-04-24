@@ -101,14 +101,18 @@ export default function HomePage() {
                 di rumah. 👍
               </p>
 
-              <div className='mt-8 flex flex-col sm:flex-row gap-4 justify-center'>
-                <ButtonLink
-                  variant='primary'
-                  className='px-8 py-3 text-lg'
-                  href='https://wa.me/6281234581741/?text=Halo%2C%20saya%20tertarik%20untuk%20memesan%20layanan%20untuk%20Catsitter%20Banyuwangi%21'
-                >
-                  Hubungi Kami!
-                </ButtonLink>
+              <div className='mt-8 flex justify-center'>
+                <div className='w-full max-w-xs sm:max-w-none sm:w-auto'>
+                  {' '}
+                  {/* Container pembungkus */}
+                  <ButtonLink
+                    variant='primary'
+                    className='flex justify-center items-center px-8 py-3 text-base sm:text-lg w-full sm:w-auto mx-auto'
+                    href='https://wa.me/6281234581741/?text=Halo%2C%20saya%20tertarik%20untuk%20memesan%20layanan%20untuk%20Catsitter%20Banyuwangi%21'
+                  >
+                    Hubungi Kami!
+                  </ButtonLink>
+                </div>
               </div>
             </div>
           </div>
