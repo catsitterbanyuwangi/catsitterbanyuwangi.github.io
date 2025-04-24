@@ -105,7 +105,7 @@ export default function HomePage() {
                 <ButtonLink
                   variant='primary'
                   className='px-8 py-3 text-lg'
-                  href='/booking'
+                  href='https://wa.me/6281234581741/?text=Halo%2C%20saya%20tertarik%20untuk%20memesan%20layanan%20untuk%20Catsitter%20Banyuwangi%21'
                 >
                   Hubungi Kami!
                 </ButtonLink>
