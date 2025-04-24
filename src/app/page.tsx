@@ -3,6 +3,7 @@
 import clsx from 'clsx';
 import { Moon, Sun } from 'lucide-react';
 import Image from 'next/image';
+import { useState } from 'react';
 import * as React from 'react';
 
 import Button from '@/components/buttons/Button';
@@ -15,10 +16,34 @@ import Logo from '~/images/Logo.png';
 
 export default function HomePage() {
   const [mode, setMode] = React.useState<'dark' | 'light'>('light');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  React.useEffect(() => {
+    const savedTheme = localStorage.getItem('theme');
+    const systemDark = window.matchMedia(
+      '(prefers-color-scheme: dark)'
+    ).matches;
+
+    if (savedTheme) {
+      setMode(savedTheme === 'dark' ? 'dark' : 'light');
+      document.documentElement.classList.toggle('dark', savedTheme === 'dark');
+    } else {
+      setMode(systemDark ? 'dark' : 'light');
+      document.documentElement.classList.toggle('dark', systemDark);
+    }
+  }, []);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   const toggleMode = () => {
-    setMode((prev) => (prev === 'dark' ? 'light' : 'dark'));
-    document.documentElement.classList.toggle('dark');
+    setMode((prev) => {
+      const newMode = prev === 'dark' ? 'light' : 'dark';
+      localStorage.setItem('theme', newMode);
+      document.documentElement.classList.toggle('dark');
+      return newMode;
+    });
   };
 
   return (
@@ -29,44 +54,166 @@ export default function HomePage() {
       )}
     >
       {/* Navbar */}
-      <nav
-        className={clsx(
-          'sticky top-0 z-50 w-full border-b',
-          mode === 'dark'
-            ? 'border-gray-800 bg-dark text-gray-100'
-            : 'border-gray-200 bg-white text-gray-900'
-        )}
-      >
-        <div className='layout flex h-16 items-center justify-between'>
-          <UnstyledLink href='/' className='hover:opacity-80'>
-            <Image
-              src={Logo}
-              alt='Catsitter Banyuwangi Logo'
-              className='w-12 h-12 rounded-full object-cover border-2 border-white transition-transform hover:scale-105'
-            />
-          </UnstyledLink>
+      <header className='fixed top-4 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full text-sm'>
+        <nav
+          className={clsx(
+            'relative max-w-2xl w-full border mx-2 py-2.5 md:flex md:items-center md:justify-between md:py-0 md:px-4 md:mx-auto transition-all duration-300',
+            isMenuOpen ? 'rounded-lg' : 'rounded-full',
+            mode === 'dark'
+              ? 'bg-dark/80 border-gray-800 backdrop-blur'
+              : 'bg-white/80 border-gray-200 backdrop-blur',
+            'md:rounded-full'
+          )}
+        >
+          <div className='px-4 md:px-0 flex justify-between items-center'>
+            {/* Logo Section */}
+            <div className='flex items-center'>
+              <UnstyledLink href='/' className='hover:opacity-80'>
+                <Image
+                  src={Logo}
+                  alt='Catsitter Banyuwangi Logo'
+                  className={clsx(
+                    'h-8 w-8 rounded-full border-2 object-cover transition-transform hover:scale-105',
+                    mode === 'dark' ? 'border-gray-800' : 'border-white'
+                  )}
+                />
+              </UnstyledLink>
+              <div className='ms-1 sm:ms-2'>
+                {/* Optional: Tambahkan text/icon tambahan di sini */}
+              </div>
+            </div>
 
-          <Button
-            variant='ghost'
-            size='sm'
-            onClick={toggleMode}
-            aria-label='Toggle dark mode'
-            className='rounded-lg p-2.5'
-          >
-            {mode === 'dark' ? (
-              <Sun className='h-5 w-5' />
-            ) : (
-              <Moon className='h-5 w-5' />
+            {/* Mobile Toggle Button */}
+            <div className='md:hidden'>
+              <button
+                type='button'
+                onClick={toggleMenu}
+                className='hs-collapse-toggle flex justify-center items-center size-7 border text-gray-500 rounded-full hover:bg-gray-200 focus:outline-none focus:bg-gray-200'
+                aria-label='Toggle navigation'
+                aria-controls='mobile-menu'
+                aria-expanded={isMenuOpen}
+              >
+                {isMenuOpen ? (
+                  <svg
+                    className='shrink-0 size-4'
+                    xmlns='http://www.w3.org/2000/svg'
+                    width='24'
+                    height='24'
+                    viewBox='0 0 24 24'
+                    fill='none'
+                    stroke='currentColor'
+                    strokeWidth='2'
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                  >
+                    <path d='M18 6 6 18' />
+                    <path d='m6 6 12 12' />
+                  </svg>
+                ) : (
+                  <svg
+                    className='shrink-0 size-3.5'
+                    xmlns='http://www.w3.org/2000/svg'
+                    width='24'
+                    height='24'
+                    viewBox='0 0 24 24'
+                    fill='none'
+                    stroke='currentColor'
+                    strokeWidth='2'
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                  >
+                    <line x1='3' x2='21' y1='6' y2='6' />
+                    <line x1='3' x2='21' y1='12' y2='12' />
+                    <line x1='3' x2='21' y1='18' y2='18' />
+                  </svg>
+                )}
+              </button>
+            </div>
+          </div>
+
+          {/* Navigation Items */}
+          <div
+            className={clsx(
+              'hs-collapse overflow-hidden transition-all duration-300 basis-full grow md:block',
+              !isMenuOpen && 'hidden'
             )}
-          </Button>
-        </div>
-      </nav>
+            id='mobile-menu'
+          >
+            <div className='flex flex-col md:flex-row md:items-center md:justify-end gap-2 md:gap-3 mt-3 md:mt-0 py-2 md:py-0 md:ps-7'>
+              <UnstyledLink
+                href='#'
+                className={clsx(
+                  'py-0.5 md:py-3 px-4 md:px-1 border-s-2 md:border-s-0 md:border-b-2 font-medium focus:outline-none',
+                  mode === 'dark'
+                    ? 'border-gray-300 text-gray-100'
+                    : 'border-gray-800 text-gray-900'
+                )}
+              >
+                Home
+              </UnstyledLink>
+              <UnstyledLink
+                href='#'
+                className={clsx(
+                  'py-0.5 md:py-3 px-4 md:px-1 border-s-2 md:border-s-0 md:border-b-2 border-transparent focus:outline-none',
+                  mode === 'dark'
+                    ? 'text-gray-300 hover:text-gray-100'
+                    : 'text-gray-600 hover:text-gray-900'
+                )}
+              >
+                Layanan
+              </UnstyledLink>
+              <UnstyledLink
+                href='#'
+                className={clsx(
+                  'py-0.5 md:py-3 px-4 md:px-1 border-s-2 md:border-s-0 md:border-b-2 border-transparent focus:outline-none',
+                  mode === 'dark'
+                    ? 'text-gray-300 hover:text-gray-100'
+                    : 'text-gray-600 hover:text-gray-900'
+                )}
+              >
+                Tentang
+              </UnstyledLink>
+              <UnstyledLink
+                href='#'
+                className={clsx(
+                  'py-0.5 md:py-3 px-4 md:px-1 border-s-2 md:border-s-0 md:border-b-2 border-transparent focus:outline-none',
+                  mode === 'dark'
+                    ? 'text-gray-300 hover:text-gray-100'
+                    : 'text-gray-600 hover:text-gray-900'
+                )}
+              >
+                FAQ
+              </UnstyledLink>
+
+              {/* Dark Mode Toggle */}
+              <div className='flex items-center ps-4 md:ps-0'>
+                <Button
+                  variant='ghost'
+                  size='sm'
+                  onClick={toggleMode}
+                  aria-label='Toggle dark mode'
+                  className={clsx(
+                    'rounded-full p-2 hover:bg-gray-200 dark:hover:bg-gray-700',
+                    mode === 'dark' ? 'text-gray-100' : 'text-gray-900'
+                  )}
+                >
+                  {mode === 'dark' ? (
+                    <Sun className='h-4 w-4' />
+                  ) : (
+                    <Moon className='h-4 w-4' />
+                  )}
+                </Button>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </header>
 
       {/* Main Content */}
       <main className='flex-1'>
         {/* Hero Section */}
         <section
-          className='relative h-[calc(100vh-4rem)] w-full'
+          className='relative h-screen w-full pt-20'
           style={{
             backgroundImage: `url(${HeroBackground.src})`,
             backgroundSize: 'cover',
