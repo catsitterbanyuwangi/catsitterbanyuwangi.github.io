@@ -9,6 +9,7 @@ import Button from '@/components/buttons/Button';
 import ButtonLink from '@/components/links/ButtonLink';
 import UnstyledLink from '@/components/links/UnstyledLink';
 
+import HeroBackground from '~/images/bg-hero.webp';
 import Logo from '~/images/Logo.png';
 
 export default function HomePage() {
@@ -22,7 +23,7 @@ export default function HomePage() {
   return (
     <div
       className={clsx(
-        'min-h-screen min-w-full', // Ini yang membuat full viewport
+        'min-h-screen min-w-full',
         mode === 'dark' ? 'bg-dark' : 'bg-white'
       )}
     >
@@ -60,36 +61,55 @@ export default function HomePage() {
         </div>
       </nav>
 
-      {/* Main Content - Menggunakan flex untuk mengisi sisa space */}
+      {/* Main Content */}
       <main className='flex-1'>
-        {/* Hero Section - Mengisi tinggi penuh */}
-        <section className='h-[calc(100vh-4rem)] w-full'>
-          {' '}
-          {/* 4rem = tinggi navbar */}
-          <div className='flex h-full w-full flex-col items-center justify-center text-center'>
-            <h1 className='text-4xl font-bold md:text-5xl'>
-              Layanan Catsitter Profesional
-            </h1>
-
-            <p className='mt-4 text-lg text-gray-600 dark:text-gray-300 md:text-xl'>
-              Memberikan perawatan terbaik untuk kucing kesayangan Anda
-            </p>
-
-            <div className='mt-8 flex gap-4'>
-              <ButtonLink
-                variant='primary'
-                className='px-8 py-3 text-lg'
-                href='/booking'
+        {/* Hero Section dengan background image */}
+        <section
+          className='relative h-[calc(100vh-4rem)] w-full'
+          style={{
+            backgroundImage: `url(${HeroBackground.src})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+          }}
+        >
+          {/* Konten hero */}
+          <div className='relative flex h-full w-full flex-col items-center justify-center text-center px-4'>
+            <div
+              className={clsx(
+                'max-w-3xl p-8 rounded-lg',
+                mode === 'dark' ? 'bg-dark/90' : 'bg-white/90'
+              )}
+            >
+              <h1
+                className={clsx(
+                  'text-4xl font-bold md:text-5xl',
+                  mode === 'dark' ? 'text-gray-100' : 'text-gray-900'
+                )}
               >
-                Pesan Sekarang
-              </ButtonLink>
-              <ButtonLink
-                variant='outline'
-                className='px-8 py-3 text-lg'
-                href='/layanan'
+                Selamat Datang di Catsitter Banyuwangi
+              </h1>
+
+              <p
+                className={clsx(
+                  'mt-4 text-lg md:text-xl',
+                  mode === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                )}
               >
-                Lihat Layanan
-              </ButtonLink>
+                Dengan Catsitter andalan di Banyuwangi, kini Anda dapat
+                menjalani hari tanpa was‑was dan kucing pun tetap merasa nyaman
+                di rumah. 👍
+              </p>
+
+              <div className='mt-8 flex flex-col sm:flex-row gap-4 justify-center'>
+                <ButtonLink
+                  variant='primary'
+                  className='px-8 py-3 text-lg'
+                  href='/booking'
+                >
+                  Hubungi Kami!
+                </ButtonLink>
+              </div>
             </div>
           </div>
         </section>
