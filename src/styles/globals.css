@@ -120,3 +120,9 @@ body {
     background-size: 0 2px, 100% 2px;
   }
 }
+
+/* NAVBAR */
+.hs-collapse {
+  transition: height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+/* END OF NAVBAR */
