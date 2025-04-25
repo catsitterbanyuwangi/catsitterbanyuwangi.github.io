@@ -10,6 +10,7 @@ import Button from '@/components/buttons/Button';
 import ButtonLink from '@/components/links/ButtonLink';
 import UnstyledLink from '@/components/links/UnstyledLink';
 import FaqSection from '@/components/sections/Faq';
+import Footer from '@/components/sections/Footer';
 
 import HeroBackground from '~/images/bg-hero.webp';
 import Logo from '~/images/Logo.png';
@@ -268,6 +269,9 @@ export default function HomePage() {
         {/* FAQ Section */}
         <FaqSection mode={mode} />
       </main>
+
+      {/* Footer Section */}
+      <Footer mode={mode} />
     </div>
   );
 }
