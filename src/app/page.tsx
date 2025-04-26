@@ -78,13 +78,13 @@ export default function HomePage() {
                   alt='Catsitter Banyuwangi Logo'
                   className={clsx(
                     'h-8 w-8 rounded-full border-2 object-cover transition-transform hover:scale-105',
-                    mode === 'dark' ? 'border-gray-800' : 'border-white'
+                    mode === 'dark' ? 'border-dark' : 'border-white'
                   )}
                 />
                 <span
                   className={clsx(
                     'ml-2 text-sm font-medium md:text-base whitespace-nowrap',
-                    mode === 'dark' ? 'text-gray-100' : 'text-gray-900'
+                    mode === 'dark' ? 'text-gray-100' : 'text-dark'
                   )}
                 >
                   Catsitter Banyuwangi
