@@ -76,6 +76,7 @@ export default function HomePage() {
                 <Image
                   src={Logo}
                   alt='Catsitter Banyuwangi Logo'
+                  priority
                   className={clsx(
                     'h-8 w-8 rounded-full border-2 object-cover transition-transform hover:scale-105',
                     mode === 'dark' ? 'border-dark' : 'border-white'
@@ -233,6 +234,15 @@ export default function HomePage() {
             backgroundRepeat: 'no-repeat',
           }}
         >
+          {/* Hidden image for eager loading */}
+          <Image
+            src={HeroBackground.src}
+            alt='Hero background'
+            priority
+            className='hidden'
+            width={1536}
+            height={1024}
+          />
           {/* Hero Content */}
           <div className='relative flex h-full w-full flex-col items-center justify-center text-center px-4'>
             <div
