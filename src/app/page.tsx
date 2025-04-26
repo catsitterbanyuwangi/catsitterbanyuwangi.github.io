@@ -69,7 +69,10 @@ export default function HomePage() {
           <div className='px-4 md:px-0 flex justify-between items-center'>
             {/* Logo Section */}
             <div className='flex items-center'>
-              <UnstyledLink href='/' className='hover:opacity-80'>
+              <UnstyledLink
+                href='/'
+                className='hover:opacity-80 flex items-center'
+              >
                 <Image
                   src={Logo}
                   alt='Catsitter Banyuwangi Logo'
@@ -78,6 +81,14 @@ export default function HomePage() {
                     mode === 'dark' ? 'border-gray-800' : 'border-white'
                   )}
                 />
+                <span
+                  className={clsx(
+                    'ml-2 text-sm font-medium md:text-base whitespace-nowrap',
+                    mode === 'dark' ? 'text-gray-100' : 'text-gray-900'
+                  )}
+                >
+                  Catsitter Banyuwangi
+                </span>
               </UnstyledLink>
               <div className='ms-1 sm:ms-2'>
                 {/* Optional: Tambahkan text/icon tambahan di sini */}
