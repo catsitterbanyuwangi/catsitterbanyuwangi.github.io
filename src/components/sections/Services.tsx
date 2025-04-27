@@ -2,7 +2,7 @@
 
 import clsx from 'clsx';
 import useEmblaCarousel from 'embla-carousel-react';
-import { Cat, Home, Syringe } from 'lucide-react';
+import { Cat, Home, Package } from 'lucide-react';
 import { useCallback, useEffect, useState } from 'react';
 
 import { NextButton, PrevButton } from '@/components/buttons/CarouselButtons';
@@ -23,21 +23,21 @@ export default function ServicesSection({ mode }: { mode: Mode }) {
   const services = [
     {
       icon: Cat,
-      title: 'Perawatan Harian',
+      title: 'Jasa Antar Kucing',
       description:
-        'Pemberian makan, grooming, dan interaksi harian dengan kucing kesayangan Anda',
-    },
-    {
-      icon: Syringe,
-      title: 'Perawatan Medis',
-      description:
-        'Pemberian obat, suntikan, dan perawatan kesehatan profesional oleh ahli',
+        'Kami melayani antar jemput anabul menuju dokter hewan, salon grooming, atau lokasi lainnya. Setiap perjalanan dirancang untuk menjaga keamanan dan kenyamanan anabul kesayangan catpawrents.',
     },
     {
       icon: Home,
-      title: 'Penitipan di Rumah',
+      title: 'Jasa Catsitter',
       description:
-        'Penitipan kucing di lingkungan rumah Anda dengan pengawasan 24 jam',
+        'Kami merawat anabul di rumah catpawrents dengan memberi makan, membersihkan litterbox, dan memberikan stimulasi bermain. Laporan berupa foto dan video akan dikirimkan saat tim kami datang dan selesai melakukan tugas sebagai bentuk perhatian kami.',
+    },
+    {
+      icon: Package,
+      title: 'Jasa Titip Keperluan Kucing',
+      description:
+        'Kami menyediakan jasa pembelian kebutuhan anabul seperti makanan, pasir, vitamin, dan perlengkapan lain. Semua kebutuhan dipilih dengan teliti untuk mendukung kesejahteraan anabul.',
     },
   ];
 
