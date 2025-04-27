@@ -7,9 +7,19 @@ import { useCallback, useEffect, useState } from 'react';
 
 import { NextButton, PrevButton } from '@/components/buttons/CarouselButtons';
 
+/** Type for theme mode variants */
 type Mode = 'dark' | 'light';
 
+/**
+ * Services section component that displays available services in a carousel (mobile) or grid (desktop)
+ * @param {Mode} mode - Determines the color theme ('dark' or 'light')
+ * @returns {JSX.Element} Services section with interactive carousel
+ */
 export default function ServicesSection({ mode }: { mode: Mode }) {
+  /**
+   * Array of service items to display
+   * @type {Array<{icon: LucideIcon, title: string, description: string}>}
+   */
   const services = [
     {
       icon: Cat,
@@ -31,7 +41,17 @@ export default function ServicesSection({ mode }: { mode: Mode }) {
     },
   ];
 
-  // Theme configuration
+  /**
+   * Theme configuration object based on the current mode
+   * @type {Object}
+   * @property {string} background - Main container background class
+   * @property {Object} text - Text color classes
+   * @property {string} card - Card background class
+   * @property {string} cardHover - Card hover state class
+   * @property {string} icon - Icon color class
+   * @property {Object} dot - Dot navigation classes
+   * @property {Object} button - Button styling classes
+   */
   const theme = {
     // Background colors for main container
     background: mode === 'dark' ? 'bg-dark' : 'bg-white',
@@ -64,28 +84,43 @@ export default function ServicesSection({ mode }: { mode: Mode }) {
     },
   };
 
+  // Initialize Embla carousel with responsive settings
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: 'center',
     containScroll: 'trimSnaps',
     loop: true,
     breakpoints: {
-      '(min-width: 768px)': { active: false },
+      '(min-width: 768px)': { active: false }, // Disable carousel on desktop
     },
   });
 
+  // State for carousel controls and navigation
   const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
   const [nextBtnEnabled, setNextBtnEnabled] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
 
+  /**
+   * Handler for scrolling to the previous slide
+   * @type {Function}
+   */
   const scrollPrev = useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev();
   }, [emblaApi]);
 
+  /**
+   * Handler for scrolling to the next slide
+   * @type {Function}
+   */
   const scrollNext = useCallback(() => {
     if (emblaApi) emblaApi.scrollNext();
   }, [emblaApi]);
 
+  /**
+   * Handler for scrolling to a specific slide index
+   * @param {number} index - The slide index to scroll to
+   * @type {Function}
+   */
   const scrollTo = useCallback(
     (index: number) => {
       if (emblaApi) emblaApi.scrollTo(index);
@@ -93,6 +128,10 @@ export default function ServicesSection({ mode }: { mode: Mode }) {
     [emblaApi]
   );
 
+  /**
+   * Callback function that updates state when carousel selection changes
+   * @type {Function}
+   */
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
     setSelectedIndex(emblaApi.selectedScrollSnap());
@@ -100,6 +139,7 @@ export default function ServicesSection({ mode }: { mode: Mode }) {
     setNextBtnEnabled(emblaApi.canScrollNext());
   }, [emblaApi]);
 
+  // Set up event listeners for carousel
   useEffect(() => {
     if (!emblaApi) return;
     onSelect();
@@ -127,7 +167,7 @@ export default function ServicesSection({ mode }: { mode: Mode }) {
         </h2>
 
         <div className='mt-12'>
-          {/* Mobile Carousel */}
+          {/* Mobile Viewport */}
           <div className='md:hidden'>
             <div className='embla__viewport overflow-hidden' ref={emblaRef}>
               <div className='embla__container flex'>
@@ -176,7 +216,7 @@ export default function ServicesSection({ mode }: { mode: Mode }) {
               </div>
             </div>
 
-            {/* Navigation */}
+            {/* Navigation buttons */}
             <div className='flex justify-between mt-6 px-4'>
               <PrevButton
                 onClick={scrollPrev}
@@ -198,7 +238,7 @@ export default function ServicesSection({ mode }: { mode: Mode }) {
               />
             </div>
 
-            {/* Dots */}
+            {/* Dot indicators */}
             <div className='flex justify-center mt-6'>
               <div className='flex space-x-2'>
                 {scrollSnaps.map((_, idx) => (
@@ -217,7 +257,7 @@ export default function ServicesSection({ mode }: { mode: Mode }) {
             </div>
           </div>
 
-          {/* Desktop Grid */}
+          {/* Desktop Viewport */}
           <div className='hidden md:grid md:grid-cols-3 md:gap-6'>
             {services.map((service, idx) => (
               <article
