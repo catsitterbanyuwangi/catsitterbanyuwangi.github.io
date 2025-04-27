@@ -11,6 +11,7 @@ import ButtonLink from '@/components/links/ButtonLink';
 import UnstyledLink from '@/components/links/UnstyledLink';
 import FaqSection from '@/components/sections/Faq';
 import Footer from '@/components/sections/Footer';
+import ServicesSection from '@/components/sections/Services';
 
 import HeroBackground from '~/images/bg-hero.webp';
 import Logo from '~/images/Logo.png';
@@ -286,6 +287,9 @@ export default function HomePage() {
             </div>
           </div>
         </section>
+
+        {/* Layanan Section */}
+        <ServicesSection mode={mode} />
 
         {/* FAQ Section */}
         <FaqSection mode={mode} />
